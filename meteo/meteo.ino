@@ -41,6 +41,7 @@ void setup()
   dht.begin();
   // подключаемся к локальной wi-fi сети
   //WiFi.begin(ssid, password);
+  WiFi.mode(WIFI_AP);
   WiFi.softAP("EMMECI", "12345678");
   
   // проверить, подключился ли wi-fi модуль к wi-fi сети
@@ -112,19 +113,19 @@ String SendHTML(float Temperaturestat, float Humiditystat)
   ptr += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\">\n";
   ptr += "<link href=\"https://fonts.googleapis.com/css?family=Open+Sans:300,400,600\" rel=\"stylesheet\">\n";
   ptr += "<title>EMMECI</title>\n";
-  ptr += "<style>html { font-family: 'Open Sans', sans-serif; display: block; margin: 0px auto; text-align: center;color: #333333;}\n";
-  ptr += "body{margin-top: 50px;}\n";
-  ptr += "h1 {margin: 50px auto 30px;}\n";
+  ptr += "<style>html { font-family: 'Open Sans', sans-serif; display: block; margin: 0px auto; text-align: center;color: #CCCCCC;}\n";
+  ptr += "body{margin-top: 50px;background-color:#333333;}\n";
   ptr += ".side-by-side{display: inline-block;vertical-align: middle;position: relative;}\n";
   ptr += ".humidity-icon{background-color: #3498db;width: 30px;height: 30px;border-radius: 50%;line-height: 36px;}\n";
   ptr += ".humidity-text{font-weight: 600;padding-left: 15px;font-size: 19px;width: 160px;text-align: left;}\n";
-  ptr += ".humidity{font-weight: 300;font-size: 60px;color: #3498db;}\n";
+  ptr += ".humidity{font-weight: 500;font-size: 60px;color: #3498db;}\n";
   ptr += ".temperature-icon{background-color: #f39c12;width: 30px;height: 30px;border-radius: 50%;line-height: 40px;}\n";
   ptr += ".temperature-text{font-weight: 600;padding-left: 15px;font-size: 19px;width: 160px;text-align: left;}\n";
-  ptr += ".temperature{font-weight: 300;font-size: 60px;color: #f39c12;}\n";
+  ptr += ".temperature{font-weight: 500;font-size: 60px;color: #f39c12;}\n";
   ptr += ".superscript{font-size: 17px;font-weight: 600;position: absolute;right: -20px;top: 15px;}\n";
   ptr += ".data{padding: 10px;}\n";
   ptr += ".btn {";
+   ptr += "width:150px;";
   ptr += " margin: 10px 20px;";
   ptr += " padding: 15px 34px;";
   ptr += "overflow: hidden;";
@@ -142,10 +143,16 @@ String SendHTML(float Temperaturestat, float Humiditystat)
   ptr += "  background: linear-gradient(90deg, #c600b2, #7619fd);";
   ptr += "}";
   ptr += ".btn2 {";
-  ptr += " background: linear-gradient(90deg, #a3ffb0, #2bd9e8);";
+  ptr += " background: linear-gradient(90deg, #4764b3, #00e6ff);";
   ptr += "}";
   ptr += ".btn3 {";
-  ptr += "   background: linear-gradient(90deg, #49c2ff, #6a27d2);";
+  ptr += "   background: linear-gradient(90deg, #feff36, #cc481f);";
+  ptr += "}";
+   ptr += ".btn4 {";
+  ptr += "  background: linear-gradient(90deg, #c77474, #b224d4);";
+  ptr += "}";
+   ptr += ".btn5 {";
+  ptr += "  background: linear-gradient(90deg, #ff1a1a, #d8ba46);";
   ptr += "}";
   ptr += ".btn:before, .btn:after {";
   ptr += "  content: \"\";";
@@ -213,8 +220,8 @@ String SendHTML(float Temperaturestat, float Humiditystat)
   ptr += "<button class=\"btn btn1\" onclick=\"request.open('POST', document.URL+'remote', true);request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');request.send('msg=0');\">SWING</button><br>";
   ptr += "<button class=\"btn btn2\" onclick=\"request.open('POST', document.URL+'remote', true);request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');request.send('msg=1');\">COOL</button><br>";
   ptr += "<button class=\"btn btn3\" onclick=\"request.open('POST', document.URL+'remote', true);request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');request.send('msg=2');\">TIMER</button><br>";
-  ptr += "<button class=\"btn btn1\" onclick=\"request.open('POST', document.URL+'remote', true);request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');request.send('msg=3');\">SPEED</button><br>";
-  ptr += "<button class=\"btn btn2\" onclick=\"request.open('POST', document.URL+'remote', true);request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');request.send('msg=4');\">OFF</button><br>";
+  ptr += "<button class=\"btn btn4\" onclick=\"request.open('POST', document.URL+'remote', true);request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');request.send('msg=3');\">SPEED</button><br>";
+  ptr += "<button class=\"btn btn5\" onclick=\"request.open('POST', document.URL+'remote', true);request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');request.send('msg=4');\">OFF</button><br>";
 
   ptr += "</div>\n";
   ptr += "</body>\n";
