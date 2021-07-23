@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>EMMECI</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="theme-color" content="#ffffff">
+    <title>Emmeci</title>
     <style>html {
         font-family: 'Open Sans', sans-serif;
         display: block;
@@ -199,10 +201,6 @@
         display: block;
     }
 
-    .btn-ok {
-        text-align: center;
-    }
-
     .btn-ok > button {
         bottom: 0;
     }
@@ -226,7 +224,7 @@
         }
 
         requestReload.addEventListener("readystatechange", getValues);
-        let timerId = setInterval(() => {
+        setInterval(() => {
             requestReload.open('POST', /* document.URL+*/'http://192.168.4.1/' + 'temp', true);
             requestReload.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             requestReload.send('msg=0');
@@ -243,7 +241,7 @@
             const modal = document.getElementById("myModal");
             const btn = document.getElementsByClassName("setting")[0];
             const span = document.getElementsByClassName("close")[0];
-            btn.addEventListener('click', function (event) {
+            btn.addEventListener('click', function () {
                 modal.style.display = "block";
             });
             span.onclick = function () {
@@ -261,9 +259,9 @@
 <div id="webpage">
 
     <div class="setting">
-        <svg version="1.1" id="Layer_4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        <svg   id="Layer_4" xmlns="http://www.w3.org/2000/svg"
              x="0px" y="0px" width="30px" height="30px"
-             viewBox="0 0 286.036 286.036" style="enable-background:new 0 0 286.036 286.036;" xml:space="preserve">
+             viewBox="0 0 286.036 286.036" style=":new 0 0 286.036 286.036;" xml:space="preserve">
             <g>
 	            <path style="fill:#E2574C;" d="M231.641,113.009c-3.915-40.789-37.875-72.792-79.684-72.792c-32.351,0-60.053,19.201-72.819,46.752
 		c-3.844-1.216-7.849-2.056-12.095-2.056c-22.214,0-40.226,18.021-40.226,40.226c0,4.416,0.885,8.591,2.199,12.551
@@ -285,8 +283,8 @@
     </div>
     <div class="data">
         <div class="side-by-side temperature-icon">
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="9.915px" height="22px"
+            <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                  x="0px" y="0px" width="9.915px" height="22px"
                  viewBox="0 0 9.915 22" enable-background="new 0 0 9.915 22" xml:space="preserve">
 <path fill="#FFFFFF" d="M3.498,0.53c0.377-0.331,0.877-0.501,1.374-0.527C5.697-0.04,6.522,0.421,6.924,1.142
 c0.237,0.399,0.315,0.871,0.311,1.33C7.229,5.856,7.245,9.24,7.227,12.625c1.019,0.539,1.855,1.424,2.301,2.491
@@ -302,8 +300,8 @@ c0.013-3.44,0-6.881,0.007-10.322C2.674,1.634,2.974,0.955,3.498,0.53z"></path>
     </div>
     <div class="data">
         <div class="side-by-side humidity-icon">
-            <svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg"
-                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12px" height="17.955px" viewBox="0 0 13 17.955" enable-background="new 0 0 13 17.955"
+            <svg id="Layer_2" xmlns="http://www.w3.org/2000/svg"
+                 x="0px" y="0px" width="12px" height="17.955px" viewBox="0 0 13 17.955" enable-background="new 0 0 13 17.955"
             xml:space="preserve">
             <path fill="#FFFFFF" d="M1.819,6.217C3.139,4.064,6.5,0,6.5,0s3.363,4.064,4.681,6.217c1.793,2.926,2.133,5.05,1.571,7.057
 c-0.438,1.574-2.264,4.681-6.252,4.681c-3.988,0-5.813-3.107-6.252-4.681C-0.313,11.267,0.026,9.143,1.819,6.217"></path>
