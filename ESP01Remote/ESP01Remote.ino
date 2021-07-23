@@ -111,7 +111,7 @@ void setup()
   pinMode(3, OUTPUT);
   dht.begin();
   WiFi.mode(wifi_ap_sta);
-  WiFi.softAP("EMMECI", "12345678"); 
+  WiFi.softAP("EMMECI", "12345678");
   server.on("/", handle_OnConnect);
   server.on("/remote", handle_Remote);
   server.on("/temp", handle_Temp);
@@ -127,10 +127,10 @@ void loop()
   server.handleClient();
 }
 
-void handle_Setting(){
-    String data = server.arg("msg");
-    //todo: сделать сохранение
-    server.send(200, "text/html", "ok");
+void handle_Setting() {
+  String data = server.arg("msg");
+  //todo: сделать сохранение
+  server.send(200, "text/html", "ok");
 }
 
 void handle_Remote() {
@@ -158,24 +158,20 @@ void handle_Remote() {
 }
 
 void handle_Temp() {
-  Temperature = dht.readTemperature(); 
-  Humidity = dht.readHumidity();       
-  String ptr = "";
-  ptr += (int)Temperature;
-  ptr += ";" ;
-  ptr += (int)Humidity;
-  server.send(200, "text/html", ptr);
+  Temperature = dht.readTemperature();
+  Humidity = dht.readHumidity();
+  server.send(200, "application/json", "{\"Temperature\":" + (int)Temperature + ",\"Humidity\":" + (int)Humidity + "}");
 }
 
 void handle_OnConnect()
 {
-  Temperature = dht.readTemperature();  
-  Humidity = dht.readHumidity();       
+  Temperature = dht.readTemperature();
+  Humidity = dht.readHumidity();
   server.send(200, "text/html", index_html);
 }
 
-void handle_Favicon(){
-   server.send(200, "image/svg+xml", favicon_html);
+void handle_Favicon() {
+  server.send(200, "image/svg+xml", favicon_html);
 }
 
 void handle_NotFound()

@@ -214,8 +214,8 @@
 
         function getValues() {
             if (requestReload.readyState === 4 && requestReload.status === 200) {
-                document.getElementById("temp").innerText = requestReload.responseText.split(';')[0];
-                document.getElementById("hum").innerText = requestReload.responseText.split(';')[1];
+                document.getElementById("temp").innerText = requestReload.response.Temperature;
+                document.getElementById("hum").innerText =  requestReload.response.Humidity;
                 document.getElementById("Layer_4").style.display = "none";
             }
             if(requestReload.readyState === 4  && requestReload.status !== 200){
@@ -225,13 +225,13 @@
 
         requestReload.addEventListener("readystatechange", getValues);
         setInterval(() => {
-            requestReload.open('POST', /* document.URL+*/'http://192.168.4.1/' + 'temp', true);
-            requestReload.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            requestReload.send('msg=0');
+            requestReload.open('GET',  document.URL + 'temp', true);
+            requestReload.responseType = 'json';
+            requestReload.send(null);
         }, 2000);
 
         function sendButtonClick(button) {
-            requestRemote.open('POST', /* document.URL+*/'http://192.168.4.1/' + 'remote', true);
+            requestRemote.open('POST', document.URL + 'remote', true);
             requestRemote.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             requestRemote.send('msg=' + button)
         }
