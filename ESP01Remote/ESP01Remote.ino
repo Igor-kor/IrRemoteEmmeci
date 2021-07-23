@@ -108,18 +108,26 @@ void setup()
   pinMode(DHTPin, INPUT);
   pinMode(3, OUTPUT);
   dht.begin();
-  WiFi.softAP("EMMECI", "12345678");
-
+  WiFi.mode(wifi_ap_sta);
+  WiFi.softAP("EMMECI", "12345678"); 
   server.on("/", handle_OnConnect);
   server.on("/remote", handle_Remote);
   server.on("/temp", handle_Temp);
+  server.on("/setting", handle_Setting);
   server.onNotFound(handle_NotFound);
   server.begin();
 }
 
 void loop()
 {
+  //todo сделать подключение к точке если такую найдет и отсключение раздачи
   server.handleClient();
+}
+
+void handle_Setting(){
+    String data = server.arg("msg");
+    //todo: сделать сохранение
+    server.send(200, "text/html", "ok");
 }
 
 void handle_Remote() {
@@ -147,8 +155,8 @@ void handle_Remote() {
 }
 
 void handle_Temp() {
-  Temperature = dht.readTemperature(); // получить значение температуры
-  Humidity = dht.readHumidity();       // получить значение влажности
+  Temperature = dht.readTemperature(); 
+  Humidity = dht.readHumidity();       
   String ptr = "";
   ptr += (int)Temperature;
   ptr += ";" ;
@@ -158,8 +166,8 @@ void handle_Temp() {
 
 void handle_OnConnect()
 {
-  Temperature = dht.readTemperature(); // получить значение температуры
-  Humidity = dht.readHumidity();       // получить значение влажности
+  Temperature = dht.readTemperature();  
+  Humidity = dht.readHumidity();       
   server.send(200, "text/html", index_html);
 }
 

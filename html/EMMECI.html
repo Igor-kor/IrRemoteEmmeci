@@ -117,6 +117,9 @@
     .btn5 {
         background: linear-gradient(90deg, #ff1a1a, #d8ba46);
     }
+    .btn-save {
+        background: linear-gradient(90deg, #454545, #212121);
+    }
 
     .btn:before, .btn:after {
         content: "";
@@ -142,6 +145,7 @@
     }
 
     .setting {
+        display: inline-block;
         position: absolute;
         right: 30px;
         margin-top: -20px;
@@ -157,15 +161,15 @@
         height: 100%;
         overflow: auto;
         background-color: rgb(0, 0, 0);
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.9);
     }
 
     .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
+        background-color: #292929;
+        margin: auto auto;
+        width: 90%;
+        min-height: 90%;
+        text-align: left;
     }
 
     .close {
@@ -181,29 +185,57 @@
         text-decoration: none;
         cursor: pointer;
     }
+
+    .modal-center {
+        text-align: center;
+    }
+
+    .modal-form > label {
+        display: block;
+        margin-top: 20px;
+    }
+
+    .modal-form > input {
+        display: block;
+    }
+
+    .btn-ok {
+        text-align: center;
+    }
+
+    .btn-ok > button {
+        bottom: 0;
+    }
+    #Layer_4{
+        display: none;
+    }
     </style>
     <script>
-        const request = new XMLHttpRequest();
-        const requestreload = new XMLHttpRequest();
+        const requestRemote = new XMLHttpRequest();
+        const requestReload = new XMLHttpRequest();
 
         function getValues() {
-            if (requestreload.readyState === 4 && requestreload.status === 200) {
-                document.getElementById("temp").innerText = requestreload.responseText.split(';')[0];
-                document.getElementById("hum").innerText = requestreload.responseText.split(';')[1];
+            if (requestReload.readyState === 4 && requestReload.status === 200) {
+                document.getElementById("temp").innerText = requestReload.responseText.split(';')[0];
+                document.getElementById("hum").innerText = requestReload.responseText.split(';')[1];
+                document.getElementById("Layer_4").style.display = "none";
+            }
+            if(requestReload.readyState === 4  && requestReload.status !== 200){
+                document.getElementById("Layer_4").style.display = "inline-block";
             }
         }
 
-        requestreload.addEventListener("readystatechange", getValues);
+        requestReload.addEventListener("readystatechange", getValues);
         let timerId = setInterval(() => {
-            requestreload.open('POST', /* document.URL+*/'http://192.168.4.1/' + 'temp', true);
-            requestreload.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            requestreload.send('msg=0');
+            requestReload.open('POST', /* document.URL+*/'http://192.168.4.1/' + 'temp', true);
+            requestReload.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            requestReload.send('msg=0');
         }, 2000);
 
         function sendButtonClick(button) {
-            request.open('POST', /* document.URL+*/'http://192.168.4.1/' + 'remote', true);
-            request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            request.send('msg=' + button)
+            requestRemote.open('POST', /* document.URL+*/'http://192.168.4.1/' + 'remote', true);
+            requestRemote.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            requestRemote.send('msg=' + button)
         }
 
         window.onload = function () {
@@ -227,7 +259,22 @@
 </head>
 <body>
 <div id="webpage">
+
     <div class="setting">
+        <svg version="1.1" id="Layer_4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             x="0px" y="0px" width="30px" height="30px"
+             viewBox="0 0 286.036 286.036" style="enable-background:new 0 0 286.036 286.036;" xml:space="preserve">
+            <g>
+	            <path style="fill:#E2574C;" d="M231.641,113.009c-3.915-40.789-37.875-72.792-79.684-72.792c-32.351,0-60.053,19.201-72.819,46.752
+		c-3.844-1.216-7.849-2.056-12.095-2.056c-22.214,0-40.226,18.021-40.226,40.226c0,4.416,0.885,8.591,2.199,12.551
+		C11.737,147.765,0,166.269,0,187.705c0,32.092,26.013,58.105,58.105,58.105v0.009h160.896v-0.009
+		c37.035,0,67.035-30.009,67.035-67.044C286.036,146.075,262.615,118.927,231.641,113.009z M184.237,197.627
+		c-4.219,4.228-11.049,4.228-15.268,0l-21.678-21.669l-21.4,21.409c-4.21,4.201-11.013,4.201-15.223,0
+		c-4.201-4.21-4.201-11.013,0-15.223l21.4-21.4l-21.669-21.669c-4.219-4.228-4.219-11.058,0-15.277
+		c4.219-4.228,11.049-4.228,15.268,0l21.669,21.678l21.686-21.686c4.21-4.21,11.013-4.21,15.223,0c4.21,4.21,4.21,11.022,0,15.223
+		L162.559,160.7l21.678,21.669C188.465,186.579,188.465,193.426,184.237,197.627z"/>
+            </g>
+        </svg>
         <svg enable-background="new 0 0 24 24" height="30" viewBox="0 0 24 24" width="30"
              xmlns="http://www.w3.org/2000/svg">
             <path d="m22.683 9.394-1.88-.239c-.155-.477-.346-.937-.569-1.374l1.161-1.495c.47-.605.415-1.459-.122-1.979l-1.575-1.575c-.525-.542-1.379-.596-1.985-.127l-1.493 1.161c-.437-.223-.897-.414-1.375-.569l-.239-1.877c-.09-.753-.729-1.32-1.486-1.32h-2.24c-.757 0-1.396.567-1.486 1.317l-.239 1.88c-.478.155-.938.345-1.375.569l-1.494-1.161c-.604-.469-1.458-.415-1.979.122l-1.575 1.574c-.542.526-.597 1.38-.127 1.986l1.161 1.494c-.224.437-.414.897-.569 1.374l-1.877.239c-.753.09-1.32.729-1.32 1.486v2.24c0 .757.567 1.396 1.317 1.486l1.88.239c.155.477.346.937.569 1.374l-1.161 1.495c-.47.605-.415 1.459.122 1.98l1.575 1.575c.526.541 1.379.595 1.985.126l1.494-1.161c.437.224.897.415 1.374.569l.239 1.876c.09.753.73 1.32 1.486 1.32h2.24c.757 0 1.396-.567 1.486-1.317l.239-1.88c.477-.155.937-.346 1.374-.569l1.495 1.161c.605.47 1.459.415 1.979-.122l1.575-1.575c.542-.526.597-1.379.127-1.985l-1.161-1.494c.224-.437.414-.898.569-1.374l1.876-.239c.753-.09 1.32-.729 1.32-1.486v-2.24c.001-.756-.566-1.395-1.316-1.485zm-10.683 7.606c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"
@@ -256,8 +303,7 @@ c0.013-3.44,0-6.881,0.007-10.322C2.674,1.634,2.974,0.955,3.498,0.53z"></path>
     <div class="data">
         <div class="side-by-side humidity-icon">
             <svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg"
-                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            ";="" width="12px" height="17.955px" viewBox="0 0 13 17.955" enable-background="new 0 0 13 17.955"
+                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12px" height="17.955px" viewBox="0 0 13 17.955" enable-background="new 0 0 13 17.955"
             xml:space="preserve">
             <path fill="#FFFFFF" d="M1.819,6.217C3.139,4.064,6.5,0,6.5,0s3.363,4.064,4.681,6.217c1.793,2.926,2.133,5.05,1.571,7.057
 c-0.438,1.574-2.264,4.681-6.252,4.681c-3.988,0-5.813-3.107-6.252-4.681C-0.313,11.267,0.026,9.143,1.819,6.217"></path>
@@ -277,7 +323,28 @@ c-0.438,1.574-2.264,4.681-6.252,4.681c-3.988,0-5.813-3.107-6.252-4.681C-0.313,11
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
+            <div class="modal-center">Settings</div>
+            <form class="modal-form">
+                <label>Wifi AP SSID
+                    <input name="APSSID" type="text">
+                </label>
+                <label>Wifi AP password
+                    <input name="APPassword" type="text">
+                </label>
+                <label>Wifi AP ip address
+                    <input name="APIpAddress" type="text">
+                </label>
+                <label>Wifi connected SSID
+                    <input name="SSID" type="text">
+                </label>
+                <label>Wifi connected password
+                    <input name="password" type="text">
+                </label>
+                <label>Temperature shift
+                    <input name="TShift" type="text">
+                </label>
+                    <button class="btn btn-save" name="btn-modal" type="button">save</button>
+            </form>
         </div>
     </div>
 </div>
