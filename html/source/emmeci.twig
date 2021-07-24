@@ -1,0 +1,109 @@
+{# index.twig #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="theme-color" content="#ffffff">
+    <title>Emmeci</title>
+    <style>
+        {% include "../build/style.css" %}
+    </style>
+    <script>
+        {% include "../build/main-min.js" %}
+    </script>
+</head>
+<body>
+<div id="webpage">
+
+    <div class="setting">
+        <svg   id="Layer_4" xmlns="http://www.w3.org/2000/svg"
+               x="0px" y="0px" width="30px" height="30px"
+               viewBox="0 0 286.036 286.036" style=":new 0 0 286.036 286.036;" xml:space="preserve">
+            <g>
+	            <path style="fill:#E2574C;" d="M231.641,113.009c-3.915-40.789-37.875-72.792-79.684-72.792c-32.351,0-60.053,19.201-72.819,46.752
+		c-3.844-1.216-7.849-2.056-12.095-2.056c-22.214,0-40.226,18.021-40.226,40.226c0,4.416,0.885,8.591,2.199,12.551
+		C11.737,147.765,0,166.269,0,187.705c0,32.092,26.013,58.105,58.105,58.105v0.009h160.896v-0.009
+		c37.035,0,67.035-30.009,67.035-67.044C286.036,146.075,262.615,118.927,231.641,113.009z M184.237,197.627
+		c-4.219,4.228-11.049,4.228-15.268,0l-21.678-21.669l-21.4,21.409c-4.21,4.201-11.013,4.201-15.223,0
+		c-4.201-4.21-4.201-11.013,0-15.223l21.4-21.4l-21.669-21.669c-4.219-4.228-4.219-11.058,0-15.277
+		c4.219-4.228,11.049-4.228,15.268,0l21.669,21.678l21.686-21.686c4.21-4.21,11.013-4.21,15.223,0c4.21,4.21,4.21,11.022,0,15.223
+		L162.559,160.7l21.678,21.669C188.465,186.579,188.465,193.426,184.237,197.627z"/>
+            </g>
+        </svg>
+        <svg enable-background="new 0 0 24 24" height="30" viewBox="0 0 24 24" width="30"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="m22.683 9.394-1.88-.239c-.155-.477-.346-.937-.569-1.374l1.161-1.495c.47-.605.415-1.459-.122-1.979l-1.575-1.575c-.525-.542-1.379-.596-1.985-.127l-1.493 1.161c-.437-.223-.897-.414-1.375-.569l-.239-1.877c-.09-.753-.729-1.32-1.486-1.32h-2.24c-.757 0-1.396.567-1.486 1.317l-.239 1.88c-.478.155-.938.345-1.375.569l-1.494-1.161c-.604-.469-1.458-.415-1.979.122l-1.575 1.574c-.542.526-.597 1.38-.127 1.986l1.161 1.494c-.224.437-.414.897-.569 1.374l-1.877.239c-.753.09-1.32.729-1.32 1.486v2.24c0 .757.567 1.396 1.317 1.486l1.88.239c.155.477.346.937.569 1.374l-1.161 1.495c-.47.605-.415 1.459.122 1.98l1.575 1.575c.526.541 1.379.595 1.985.126l1.494-1.161c.437.224.897.415 1.374.569l.239 1.876c.09.753.73 1.32 1.486 1.32h2.24c.757 0 1.396-.567 1.486-1.317l.239-1.88c.477-.155.937-.346 1.374-.569l1.495 1.161c.605.47 1.459.415 1.979-.122l1.575-1.575c.542-.526.597-1.379.127-1.985l-1.161-1.494c.224-.437.414-.898.569-1.374l1.876-.239c.753-.09 1.32-.729 1.32-1.486v-2.24c.001-.756-.566-1.395-1.316-1.485zm-10.683 7.606c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z"
+                  fill="#90a4ae"/>
+            <path d="m12 0h-1.12c-.757 0-1.396.567-1.486 1.317l-.239 1.88c-.478.155-.938.345-1.375.569l-1.494-1.161c-.276-.214-.603-.319-.928-.319-.386 0-.768.149-1.051.441l-1.575 1.574c-.542.526-.597 1.38-.127 1.986l1.161 1.494c-.224.437-.414.897-.569 1.374l-1.877.239c-.753.09-1.32.729-1.32 1.486v2.24c0 .757.567 1.396 1.317 1.486l1.88.239c.155.477.346.937.569 1.374l-1.161 1.495c-.47.605-.415 1.459.122 1.98l1.575 1.575c.286.295.67.445 1.058.445.324 0 .651-.105.927-.318l1.494-1.161c.437.224.897.415 1.374.569l.239 1.876c.09.753.73 1.32 1.486 1.32h1.12v-7c-2.757 0-5-2.243-5-5s2.243-5 5-5z"
+                  fill="#7d8f97"/>
+        </svg>
+    </div>
+    <div class="data">
+        <div class="side-by-side temperature-icon">
+            <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                 x="0px" y="0px" width="9.915px" height="22px"
+                 viewBox="0 0 9.915 22" enable-background="new 0 0 9.915 22" xml:space="preserve">
+<path fill="#FFFFFF" d="M3.498,0.53c0.377-0.331,0.877-0.501,1.374-0.527C5.697-0.04,6.522,0.421,6.924,1.142
+c0.237,0.399,0.315,0.871,0.311,1.33C7.229,5.856,7.245,9.24,7.227,12.625c1.019,0.539,1.855,1.424,2.301,2.491
+c0.491,1.163,0.518,2.514,0.062,3.693c-0.414,1.102-1.24,2.038-2.276,2.594c-1.056,0.583-2.331,0.743-3.501,0.463
+c-1.417-0.323-2.659-1.314-3.3-2.617C0.014,18.26-0.115,17.104,0.1,16.022c0.296-1.443,1.274-2.717,2.58-3.394
+c0.013-3.44,0-6.881,0.007-10.322C2.674,1.634,2.974,0.955,3.498,0.53z"></path>
+</svg>
+        </div>
+        <div class="side-by-side temperature-text">Temperature</div>
+        <div class="side-by-side temperature">
+            <div id="temp">0</div>
+            <span class="superscript">°C</span></div>
+    </div>
+    <div class="data">
+        <div class="side-by-side humidity-icon">
+            <svg id="Layer_2" xmlns="http://www.w3.org/2000/svg"
+                 x="0px" y="0px" width="12px" height="17.955px" viewBox="0 0 13 17.955" enable-background="new 0 0 13 17.955"
+                 xml:space="preserve">
+            <path fill="#FFFFFF" d="M1.819,6.217C3.139,4.064,6.5,0,6.5,0s3.363,4.064,4.681,6.217c1.793,2.926,2.133,5.05,1.571,7.057
+c-0.438,1.574-2.264,4.681-6.252,4.681c-3.988,0-5.813-3.107-6.252-4.681C-0.313,11.267,0.026,9.143,1.819,6.217"></path>
+            </svg>
+        </div>
+        <div class="side-by-side humidity-text">Humidity</div>
+        <div class="side-by-side humidity">
+            <div id="hum">0</div>
+            <span class="superscript">%</span></div>
+    </div>
+    <button class="btn btn1" onclick="sendButtonClick(0);">SWING</button>
+    <button class="btn btn2" onclick="sendButtonClick(1);">COOL</button>
+    <button class="btn btn3" onclick="sendButtonClick(2);">TIMER</button>
+    <button class="btn btn4" onclick="sendButtonClick(3);">SPEED</button>
+    <button class="btn btn5" onclick="sendButtonClick(4);">OFF</button>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-center">Settings</div>
+            <form class="modal-form">
+                <label>Wifi AP SSID
+                    <input name="APSSID" type="text">
+                </label>
+                <label>Wifi AP password
+                    <input name="APPassword" type="text">
+                </label>
+                <label>Wifi AP ip address
+                    <input name="APIpAddress" type="text">
+                </label>
+                <label>Wifi connected SSID
+                    <input name="SSID" type="text">
+                </label>
+                <label>Wifi connected password
+                    <input name="password" type="text">
+                </label>
+                <label>Temperature shift
+                    <input name="TShift" type="text">
+                </label>
+                <button class="btn btn-save" name="btn-modal" type="button">save</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

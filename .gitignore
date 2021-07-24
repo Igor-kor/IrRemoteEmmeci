@@ -1,1 +1,4 @@
 /html/.idea/
+/html/node_modules/
+/html/build/ 
+/html/package-lock.json
