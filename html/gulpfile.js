@@ -41,7 +41,7 @@ gulp.task('compress',async function() {
 });
 
 gulp.task('watch', function (){
-    gulp.watch('source/*.html',  gulp.parallel('minify-html'));
+    gulp.watch('source/*.*',  gulp.parallel('default'));
 // other tasks
 });
 
