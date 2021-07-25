@@ -55,10 +55,10 @@ async function sendSetting(event) {
 }
 requestSendSettings.addEventListener("readystatechange", function (){
     if (requestSendSettings.readyState === 4 && requestSendSettings.status === 200) {
-        alert("Settings saved.");
+        document.getElementsByClassName("close")[0].click();
     }
     if(requestSendSettings.readyState === 4  && requestSendSettings.status !== 200){
-        alert("Error load settings, check link!");
+        alert("Error save settings, check connect!");
     }
 });
 
@@ -78,6 +78,6 @@ requestGetSettings.addEventListener("readystatechange", function (){
         modalForm.TShift.value = requestGetSettings.response.TShift;
     }
     if(requestGetSettings.readyState === 4  && requestGetSettings.status !== 200){
-        alert("Error load settings, check link!");
+        alert("Error load settings, check connect!");
     }
 });
