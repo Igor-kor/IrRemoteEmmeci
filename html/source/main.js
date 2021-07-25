@@ -28,17 +28,56 @@ function sendButtonClick(button) {
 window.onload = function () {
     getValues();
     const modal = document.getElementById("myModal");
+    const modalForm = document.getElementsByClassName("modal-form")[0];
     const btn = document.getElementsByClassName("setting")[0];
     const span = document.getElementsByClassName("close")[0];
     btn.addEventListener('click', function () {
         modal.style.display = "block";
+        getSetting();
     });
     span.onclick = function () {
         modal.style.display = "none";
     }
+    modalForm.addEventListener("submit",sendSetting);
     window.onclick = function (event) {
         if (event.target === modal) {
             modal.style.display = "none";
         }
     }
 };
+const requestGetSettings = new XMLHttpRequest();
+const requestSendSettings = new XMLHttpRequest();
+async function sendSetting(event) {
+    event.preventDefault ();
+    event.stopImmediatePropagation ();
+    requestSendSettings.open('POST', document.URL + 'setting', true);
+    requestSendSettings.send(new FormData(document.querySelector(".modal-form")));
+}
+requestSendSettings.addEventListener("readystatechange", function (){
+    if (requestSendSettings.readyState === 4 && requestSendSettings.status === 200) {
+        alert("Settings saved.");
+    }
+    if(requestSendSettings.readyState === 4  && requestSendSettings.status !== 200){
+        alert("Error load settings, check link!");
+    }
+});
+
+function getSetting(){
+    requestGetSettings.open('GET',  document.URL + 'setting', true);
+    requestGetSettings.responseType = 'json';
+    requestGetSettings.send(null);
+}
+requestGetSettings.addEventListener("readystatechange", function (){
+    if (requestGetSettings.readyState === 4 && requestGetSettings.status === 200) {
+        const modalForm = document.querySelector(".modal-form");
+        modalForm.APSSID.value = requestGetSettings.response.APSSID;
+        modalForm.APPassword.value = requestGetSettings.response.APPassword;
+        modalForm.APIpAddress.value = requestGetSettings.response.APIpAddress;
+        modalForm.SSID.value = requestGetSettings.response.SSID;
+        modalForm.password.value = requestGetSettings.response.password;
+        modalForm.TShift.value = requestGetSettings.response.TShift;
+    }
+    if(requestGetSettings.readyState === 4  && requestGetSettings.status !== 200){
+        alert("Error load settings, check link!");
+    }
+});
