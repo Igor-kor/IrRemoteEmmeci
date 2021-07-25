@@ -110,9 +110,7 @@ body {
 .btn5 {
     background: linear-gradient(90deg, #ff1a1a, #d8ba46);
 }
-.btn-save {
-    background: linear-gradient(90deg, #454545, #212121);
-}
+
 
 .btn:before, .btn:after {
     content: "";
@@ -166,35 +164,67 @@ body {
 }
 
 .close {
+    position: absolute;
     color: #aaa;
-    float: right;
+    right: 30px;
     font-size: 28px;
     font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: white;
     text-decoration: none;
     cursor: pointer;
 }
 
-.modal-center {
+.modal-content>h1 {
     text-align: center;
+   padding-top: 20px;
 }
 
 .modal-form > label {
+    padding-left: 50px;
+    font-size: 1.1rem;
+    text-align: left;
     display: block;
     margin-top: 20px;
 }
+.modal-form{
+    margin-right: auto;
+    margin-left: auto;
+    width: 300px;
+}
 
-.modal-form > input {
+.modal-form > label > input {
+    margin-left: -20px;
+    margin-right: auto;
     display: block;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-style: solid;
+    border-color: #333333;
+    border-radius: 5px;
+    text-align: center;
+    outline: transparent;
+}
+.btn-save {
+    background: #666666;
+    position: relative;
+    width: 240px;
+    margin: 40px 30px auto;
+    padding: 15px 34px;
+    font-size: 1rem;
+    overflow: hidden;
+    color: white;
+    border-style: solid;
+    border-color: #333333;
+    border-radius: 5px;
+    text-align: center;
+    outline: transparent;
 }
 
-.btn-ok > button {
-    bottom: 0;
-}
+
 #Layer_4{
     display: none;
 }
