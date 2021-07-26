@@ -17,7 +17,7 @@ setInterval(() => {
     requestReload.open('GET',  document.URL + 'temp', true);
     requestReload.responseType = 'json';
     requestReload.send(null);
-}, 2000);
+}, 5000);
 
 function sendButtonClick(button) {
     requestRemote.open('POST', document.URL + 'remote', true);
