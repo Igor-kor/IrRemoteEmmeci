@@ -1,15 +1,15 @@
 /*
- * todo:
- * 1 - сделать открытие настроек после прогрузки данных, если нет то выдать ошибку
- * 2 - сделать трим на все поля
- * 3 - сделать ильтры на все поля с масками
- * 4 - сделать разные вкладки или разделить по опциям настройки(разделить на колонки)
- * 5 - сделать функцию рестарта
- * 6 - сделать функцию сброса всех настроек(пин к земле и при старте сброс) также сброс из веба
- * 7 - сделать проверку всех входящих данных сохранения настроек
- * 8 - сделать накопление данных о влажности чтобы сгладить и усреднить данные
- * 9 - принимать json формат
- * 10 - сделать подключение как клиента к точке, при этом выключить раздачу(при невозможности подключиться включать точку доступа)
+   todo:
+   1 - сделать открытие настроек после прогрузки данных, если нет то выдать ошибку
+   2 - сделать трим на все поля
+   3 - сделать фильтры на все поля с масками
+   4 - сделать разные вкладки или разделить по опциям настройки(разделить на колонки)
+   5 - сделать функцию рестарта
+   6 - сделать функцию сброса всех настроек(пин к земле и при старте сброс) также сброс из веба
+   7 - сделать проверку всех входящих данных сохранения настроек
+   8 - сделать накопление данных о влажности чтобы сгладить и усреднить данные
+   9 - принимать json формат
+   10 - сделать подключение как клиента к точке, при этом выключить раздачу(при невозможности подключиться включать точку доступа)
 */
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
@@ -32,7 +32,7 @@ uint16_t offButton[63] = {880, 1620, 880, 1620, 2030, 520, 1980, 470, 780, 1720,
 ESP8266WebServer server(80);
 
 // датчик DHT
-uint8_t DHTPin = 0; 
+uint8_t DHTPin = 0;
 DHT dht(DHTPin, DHTTYPE);
 
 float Temperature;
@@ -57,7 +57,7 @@ const char favicon_svg[] PROGMEM = R"rawliteral(<svg height="512" viewBox="0 0 6
 Settings settings;
 
 void handle_GetSetting()
-{ 
+{
   server.send(200, "application/json", settings.getJson());
 }
 
@@ -65,7 +65,6 @@ void handle_SaveSetting()
 {
   settings.SaveSetting(server);
   server.send(200, "text/html", "ok");
-  ESP.restart();// RESTART AFTER SAVE
 }
 
 void handle_Remote()
@@ -123,18 +122,24 @@ void handle_NotFound()
   server.send(404, "text/plain", "Not found");
 }
 
+void handle_Restart() {
+  server.send(200, "text/html", "ok");
+  ESP.restart();// RESTART AFTER SAVE
+}
+
 void setup()
 {
   delay(100);
   pinMode(DHTPin, INPUT);
-  pinMode(3, OUTPUT); 
+  pinMode(3, OUTPUT);
   settings.ReadSettings();
   dht.begin();
-  WiFi.mode(WIFI_AP_STA); 
+  WiFi.mode(WIFI_AP_STA);
   WiFi.softAPConfig ( settings.getAPIpAddress(), settings.getAPGateway(), settings.getAPSubnet());
   WiFi.softAP(settings.getAPSSID(), settings.getAPPassword());
   server.on("/", handle_OnConnect);
   server.on("/remote", handle_Remote);
+  server.on("/restart", handle_Restart);
   server.on("/temp", handle_Temp);
   server.on("/setting", HTTP_GET, handle_GetSetting);
   server.on("/setting", HTTP_POST, handle_SaveSetting);
@@ -144,6 +149,6 @@ void setup()
 }
 
 void loop()
-{ 
+{
   server.handleClient();
 }

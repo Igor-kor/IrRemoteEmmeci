@@ -25,6 +25,11 @@ function sendButtonClick(button) {
     requestRemote.send('msg=' + button)
 }
 
+function restart() {
+    requestRemote.open('GET', document.URL + 'restart', true);
+    requestRemote.send(null)
+}
+
 window.onload = function () {
     getValues();
     const modal = document.getElementById("myModal");
