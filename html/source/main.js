@@ -78,9 +78,14 @@ requestGetSettings.addEventListener("readystatechange", function (){
         modalForm.APSSID.value = requestGetSettings.response.APSSID;
         modalForm.APPassword.value = requestGetSettings.response.APPassword;
         modalForm.APIpAddress.value = requestGetSettings.response.APIpAddress;
-        modalForm.SSID.value = requestGetSettings.response.SSID;
-        modalForm.password.value = requestGetSettings.response.password;
+        modalForm.APGateway.value = requestGetSettings.response.APGateway;
+        modalForm.APSubnet.value = requestGetSettings.response.APSubnet;
+        modalForm.ClientSSID.value = requestGetSettings.response.ClientSSID;
+        modalForm.ClientPassword.value = requestGetSettings.response.ClientPassword;
         modalForm.TShift.value = requestGetSettings.response.TShift;
+        modalForm.APChannel.value = requestGetSettings.response.APChannel;
+        modalForm.APHidden.value = requestGetSettings.response.APHidden;
+        modalForm.APMaxConnection.value = requestGetSettings.response.APMaxConnection;
     }
     if(requestGetSettings.readyState === 4  && requestGetSettings.status !== 200){
         alert("Error load settings, check connect!");

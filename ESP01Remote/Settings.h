@@ -1,14 +1,15 @@
 #ifndef SETTING_H
 #define SETTING_H
 #define EEPROM_SIZE_VALUE 64
-#define EEPROM_SIZE EEPROM_SIZE_VALUE*6
+#define EEPROM_SIZE EEPROM_SIZE_VALUE*12
 
 #include <ESP8266WebServer.h>
 #include <EEPROM.h>
+#include <IPAddress.h>
 
 
 class Settings {
-  
+
   private:
     char APSSID[EEPROM_SIZE_VALUE];
     char APPassword[EEPROM_SIZE_VALUE];
@@ -25,18 +26,28 @@ class Settings {
     const int adrAPSSID = 0 * EEPROM_SIZE_VALUE;
     const int adrAPPassword = 1 * EEPROM_SIZE_VALUE;
     const int adrAPIpAddress  =  2 * EEPROM_SIZE_VALUE;
-    const int adrClientSSID  =  3 * EEPROM_SIZE_VALUE;
-    const int adrClientPassword  =  4 * EEPROM_SIZE_VALUE;
-    const int adrTShift  = 5 * EEPROM_SIZE_VALUE;
+    const int adrAPGateway  =  3 * EEPROM_SIZE_VALUE;
+    const int adrAPSubnet  =  4 * EEPROM_SIZE_VALUE;
+    const int adrClientSSID  =  5 * EEPROM_SIZE_VALUE;
+    const int adrClientPassword  =  6 * EEPROM_SIZE_VALUE;
+    const int adrTShift  = 7 * EEPROM_SIZE_VALUE;
+    const int adrAPChannel  = 8 * EEPROM_SIZE_VALUE;
+    const int adrAPHidden  = 9 * EEPROM_SIZE_VALUE;
+    const int adrAPMaxConnection  = 10 * EEPROM_SIZE_VALUE;
 
-    void eepromWrite(int addr, char* value);
-    void eepromRead(int addr, char* value);
+    void eepromWrite(int addr, IPAddress value);
+    void eepromWrite(int addr, int size, char* value);
+    void eepromRead(int addr, IPAddress value);
+    void eepromRead(int addr, int size, char* value);
+    void SaveSettings();
 
   public:
     Settings();
-    void SaveSetting(ESP8266WebServer &server);
+    void SetDefaultSettings();
+    void SetSetting(ESP8266WebServer &server);
     void ReadSettings();
     IPAddress IPfromString(String s);
+    String IpToString(IPAddress address);
     String getJson();
     /** Getters */
     char* getAPSSID();
@@ -52,17 +63,17 @@ class Settings {
     char* getAPMaxConnection();
 
     /** Setters */
-    void setAPSSID();
-    void setAPPassword();
-    void setAPIpAddress();
-    void setAPGateway();
-    void setAPSubnet();
-    void setClientSSID();
-    void setClientPassword();
-    void setTShift();
-    void setAPChannel();
-    void setAPHidden();
-    void setAPMaxConnection();
+    void setAPSSID(String s);
+    void setAPPassword(String s);
+    void setAPIpAddress(String s);
+    void setAPGateway(String s);
+    void setAPSubnet(String s);
+    void setClientSSID(String s);
+    void setClientPassword(String s);
+    void setTShift(String s);
+    void setAPChannel(String s);
+    void setAPHidden(String s);
+    void setAPMaxConnection(String s);
 
 };
 #endif
