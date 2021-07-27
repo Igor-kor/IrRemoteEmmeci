@@ -5,11 +5,12 @@
    3 - сделать фильтры на все поля с масками
    4 - сделать разные вкладки или разделить по опциям настройки(разделить на колонки)
   +5 - сделать функцию рестарта
- -+6 - сделать функцию сброса всех настроек(пин к земле и при старте сброс) также сброс из веба
+  -+6 - сделать функцию сброса всех настроек(пин к земле и при старте сброс) также сброс из веба
    7 - сделать проверку всех входящих данных сохранения настроек
    8 - сделать накопление данных о влажности чтобы сгладить и усреднить данные
    9 - принимать json формат
    10 - сделать подключение как клиента к точке, при этом выключить раздачу(при невозможности подключиться включать точку доступа)
+   11 - указать правильный размер eeprom и переменных
 */
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
@@ -129,17 +130,13 @@ void handle_Restart() {
 
 void setup()
 {
-  Serial.begin(74880);
   delay(100);
   pinMode(DHTPin, INPUT);
   pinMode(3, OUTPUT);
-  settings.SetDefaultSettings();
-    delay(3000);
   settings.ReadSettings();
   dht.begin();
   WiFi.mode(WIFI_AP_STA);
- // WiFi.softAPConfig ( settings.getAPIpAddress(), settings.getAPGateway(), settings.getAPSubnet()); 
-    WiFi.softAPConfig ( IPAddress(192,168,4,1),  IPAddress(192,168,4,1), IPAddress(255,255,255,0));
+  WiFi.softAPConfig ( settings.getAPIpAddress(), settings.getAPGateway(), settings.getAPSubnet());
   WiFi.softAP(settings.getAPSSID(), settings.getAPPassword());
   server.on("/", handle_OnConnect);
   server.on("/remote", handle_Remote);

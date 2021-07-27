@@ -37,9 +37,9 @@ void Settings::SaveSettings() {
 void Settings::ReadSettings() {
   eepromRead(adrAPSSID, EEPROM_SIZE_VALUE, APSSID);
   eepromRead(adrAPPassword, EEPROM_SIZE_VALUE, APPassword);
-  eepromRead(adrAPIpAddress, APIpAddress);
-  eepromRead(adrAPGateway, APGateway);
-  eepromRead(adrAPSubnet, APSubnet);
+  APIpAddress = eepromRead(adrAPIpAddress );
+  APGateway = eepromRead(adrAPGateway);
+  APSubnet = eepromRead(adrAPSubnet);
   eepromRead(adrClientSSID, EEPROM_SIZE_VALUE, ClientSSID);
   eepromRead(adrClientPassword, EEPROM_SIZE_VALUE, ClientPassword);
   eepromRead(adrTShift, EEPROM_SIZE_VALUE, APSSID);
@@ -64,11 +64,13 @@ String Settings::IpToString(IPAddress address) {
   return String() + address[0] + "." + address[1] + "." + address[2] + "." + address[3];
 }
 
-void Settings::eepromRead(int addr, IPAddress value) {
+IPAddress Settings::eepromRead(int addr) {
+  IPAddress value;
   for (int i = 0; i <= 3; i++) {
     byte readValue = EEPROM.read(addr + i);
     value[i] = int(readValue);
   }
+  return value;
 }
 
 void Settings::eepromWrite(int addr, IPAddress value)

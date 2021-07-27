@@ -37,7 +37,7 @@ class Settings {
 
     void eepromWrite(int addr, IPAddress value);
     void eepromWrite(int addr, int size, char* value);
-    void eepromRead(int addr, IPAddress value);
+    IPAddress eepromRead(int addr);
     void eepromRead(int addr, int size, char* value);
     void SaveSettings();
 
