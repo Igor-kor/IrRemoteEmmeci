@@ -6,6 +6,7 @@
 #include <ESP8266WebServer.h>
 #include <EEPROM.h>
 #include <IPAddress.h>
+#include <Arduino_JSON.h>
 
 
 class Settings {

@@ -109,31 +109,19 @@ void Settings::eepromRead(int addr, int size, char* value)
 
 String Settings::getJson() {
   this->ReadSettings();
-  String ptr = "";
-  ptr += "{\"APSSID\":\"" ;
-  ptr += APSSID ;
-  ptr += "\",\"APPassword\":\"" ;
-  ptr += APPassword ;
-  ptr += "\",\"APIpAddress\":\"" ;
-  ptr += IpToString(APIpAddress) ;
-  ptr += "\",\"APGateway\":\"" ;
-  ptr += IpToString(APGateway) ;
-  ptr += "\",\"APSubnet\":\"" ;
-  ptr += IpToString(APSubnet) ;
-  ptr += "\",\"ClientSSID\":\"" ;
-  ptr += ClientSSID ;
-  ptr += "\",\"ClientPassword\":\"" ;
-  ptr += ClientPassword ;
-  ptr += "\",\"TShift\":\"" ;
-  ptr += TShift ;
-  ptr += "\",\"APChannel\":\"" ;
-  ptr += APChannel ;
-  ptr += "\",\"APHidden\":\"" ;
-  ptr += APHidden ;
-  ptr += "\",\"APMaxConnection\":\"" ;
-  ptr += APMaxConnection ;
-  ptr += "\"}";
-  return ptr;
+  JSONVar response;
+  response["APSSID"] = APSSID;
+  response["APPassword"] = APPassword;
+  response["APIpAddress"] = IpToString(APIpAddress);
+  response["APGateway"] = IpToString(APGateway);
+  response["APSubnet"] = IpToString(APSubnet);
+  response["ClientSSID"] = ClientSSID;
+  response["ClientPassword"] = ClientPassword;
+  response["TShift"] = TShift;
+  response["APChannel"] = APChannel;
+  response["APHidden"] = APHidden;
+  response["APMaxConnection"] = APMaxConnection;
+  return JSON.stringify(response);
 }
 
 
@@ -174,10 +162,12 @@ char* Settings::getAPMaxConnection() {
 
 /** Setters */
 void Settings::setAPSSID(String s) {
-  strcpy(APSSID, s.c_str());
+  if (s.length() > 0)
+    strcpy(APSSID, s.c_str());
 }
 void Settings::setAPPassword(String s) {
-  strcpy(APPassword, s.c_str());
+  if (s.length() > 7)
+    strcpy(APPassword, s.c_str());
 }
 void Settings::setAPIpAddress(String s) {
   APIpAddress = IPfromString(s);
@@ -189,22 +179,28 @@ void Settings::setAPSubnet(String s) {
   APSubnet = IPfromString(s);
 }
 void Settings::setClientSSID(String s) {
-  strcpy(ClientSSID, s.c_str());
+  if (s.length() > 0)
+    strcpy(ClientSSID, s.c_str());
 }
 void Settings::setClientPassword(String s) {
-  strcpy(ClientPassword, s.c_str());
+  if (s.length() > 7)
+    strcpy(ClientPassword, s.c_str());
 }
 void Settings::setTShift(String s) {
-  strcpy(TShift, s.c_str());
+  if (s.length() > 0)
+    strcpy(TShift, s.c_str());
 }
 void Settings::setAPChannel(String s) {
-  strcpy(APChannel, s.c_str());
+  if (s.length() > 0 && s.toInt() < 13 && s.toInt() > 0)
+    strcpy(APChannel, s.c_str());
 }
 void Settings::setAPHidden(String s) {
-  strcpy(APHidden, s.c_str());
+  if (s.length() > 0 && (s.toInt() == 1 || s.toInt() == 0))
+    strcpy(APHidden, s.c_str());
 }
 void Settings::setAPMaxConnection(String s) {
-  strcpy(APMaxConnection, s.c_str());
+  if (s.length() > 0 && s.toInt() < 9 && s.toInt() > 0)
+    strcpy(APMaxConnection, s.c_str());
 }
 
 void Settings::SetDefaultSettings() {

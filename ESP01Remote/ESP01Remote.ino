@@ -4,8 +4,7 @@
    2 - сделать трим на все поля
    3 - сделать фильтры на все поля с масками
    4 - сделать разные вкладки или разделить по опциям настройки(разделить на колонки)
-  +5 - сделать функцию рестарта
-  -+6 - сделать функцию сброса всех настроек(пин к земле и при старте сброс) также сброс из веба
+  -+5 - сделать функцию рестарта
    7 - сделать проверку всех входящих данных сохранения настроек
    8 - сделать накопление данных о влажности чтобы сгладить и усреднить данные
    9 - принимать json формат
@@ -16,9 +15,13 @@
 #include <ESP8266WebServer.h>
 #include <DHT.h>
 #include <IRremote.h>
+#include <Arduino_JSON.h>
 #include "Settings.h";
 
-IRsend irsend(3);
+#define IR_DIODE_PIN 3
+#define SET_DEFAULT_PIN 3
+
+IRsend irsend(IR_DIODE_PIN);
 
 uint8_t swingButton[63] = {17, 33, 17, 33, 41, 9, 40, 10, 15, 35, 15, 35, 39, 11, 39, 11, 38, 12, 14, 36, 13, 37, 38, 12, 38, 12, 38, 12, 13, 37, 13, 37, 38, 12, 13, 37, 13, 37, 38, 11, 39, 11, 39, 11, 14, 36, 14, 36, 39, 11, 14, 36, 14, 36, 39, 11, 39, 11, 39, 11, 13, 37, 13}; // Protocol=UNKNOWN Hash=0x5A4656EA 32 bits received
 uint8_t coolButton[63] = {17, 33, 16, 34, 39, 12, 38, 12, 13, 36, 14, 36, 39, 11, 39, 11, 14, 36, 39, 11, 39, 11, 14, 36, 13, 37, 14, 36, 39, 11, 14, 36, 13, 37, 38, 12, 38, 12, 14, 36, 13, 37, 13, 37, 38, 12, 13, 37, 13, 36, 39, 11, 39, 11, 14, 36, 14, 36, 14, 36, 39, 11, 14}; // Protocol=UNKNOWN Hash=0xF7676EB 32 bits received
@@ -95,34 +98,29 @@ void handle_Remote()
 
 void handle_Temp()
 {
-  Temperature = dht.readTemperature();
-  Humidity = dht.readHumidity();
-  String ptr = "";
-  ptr += "{\"Temperature\":" ;
-  ptr += (int)Temperature ;
-  ptr += ",\"Humidity\":" ;
-  ptr += (int)Humidity ;
-  ptr += "}";
-  server.send(200, "application/json", ptr);
+  JSONVar response;
+  response["Temperature"] = dht.readTemperature();
+  response["Humidity"]  =  dht.readHumidity();
+  server.send(200, "application/json", JSON.stringify(response).c_str());
 }
 
 void handle_OnConnect()
 {
   Temperature = dht.readTemperature();
   Humidity = dht.readHumidity();
-  server.send(200, "text/html", index_html);
+  server.send_P(200, "text/html", index_html);
 }
 
 void handle_Favicon()
 {
-  server.send(200, "image/svg+xml", favicon_svg);
+  server.send_P(200, "image/svg+xml", favicon_svg);
 }
 
 void handle_NotFound()
 {
   server.send(404, "text/plain", "Not found");
 }
-
+// todo: не работает!!!
 void handle_Restart() {
   server.send(200, "text/html", "ok");
   ESP.restart();
@@ -131,8 +129,13 @@ void handle_Restart() {
 void setup()
 {
   delay(100);
+  //Serial.begin(74880);
+  pinMode(SET_DEFAULT_PIN, INPUT);
+  if (digitalRead(SET_DEFAULT_PIN) == HIGH) {
+    settings.SetDefaultSettings();
+  }
   pinMode(DHTPin, INPUT);
-  pinMode(3, OUTPUT);
+  pinMode(IR_DIODE_PIN, OUTPUT);
   settings.ReadSettings();
   dht.begin();
   WiFi.mode(WIFI_AP_STA);
