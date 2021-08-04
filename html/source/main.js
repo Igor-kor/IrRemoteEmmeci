@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     const btn = document.getElementsByClassName("setting")[0];
     const span = document.getElementsByClassName("close")[0];
     btn.addEventListener('click', function () {
-        modal.style.display = "block";
         getSetting();
     });
     span.onclick = function () {
@@ -79,8 +78,9 @@ function getSetting(){
     requestGetSettings.send(null);
 }
 requestGetSettings.addEventListener("readystatechange", function (){
+    const modal = document.getElementById("myModal");
+    const modalForm = document.querySelector(".modal-form");
     if (requestGetSettings.readyState === 4 && requestGetSettings.status === 200) {
-        const modalForm = document.querySelector(".modal-form");
         modalForm.APSSID.value = requestGetSettings.response.APSSID;
         modalForm.APPassword.value = requestGetSettings.response.APPassword;
         modalForm.APIpAddress.value = requestGetSettings.response.APIpAddress;
@@ -92,6 +92,7 @@ requestGetSettings.addEventListener("readystatechange", function (){
         modalForm.APChannel.value = requestGetSettings.response.APChannel;
         modalForm.APHidden.value = requestGetSettings.response.APHidden;
         modalForm.APMaxConnection.value = requestGetSettings.response.APMaxConnection;
+        modal.style.display = "block";
     }
     if(requestGetSettings.readyState === 4  && requestGetSettings.status !== 200){
         alert("Error load settings, check connect!");
