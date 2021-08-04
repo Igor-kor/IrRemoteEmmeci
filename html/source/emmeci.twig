@@ -77,49 +77,64 @@ c-0.438,1.574-2.264,4.681-6.252,4.681c-3.988,0-5.813-3.107-6.252-4.681C-0.313,11
     <button class="btn btn3" onclick="sendButtonClick(2);">TIMER</button>
     <button class="btn btn4" onclick="sendButtonClick(3);">SPEED</button>
     <button class="btn btn5" onclick="sendButtonClick(4);">OFF</button>
-
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h1>Settings</h1>
             <form class="modal-form">
-                <label>Wifi AP SSID
-                    <input name="APSSID" type="text">
-                </label>
-                <label>Wifi AP password
-                    <input name="APPassword" type="text">
-                </label>
-                <label>Wifi AP channel
-                    <input name="APChannel" type="text">
-                </label>
-                <label>Wifi AP hidden
-                    <input name="APHidden" type="text">
-                </label>
-                <label>Wifi AP max_connection
-                    <input name="APMaxConnection" type="text">
-                </label>
-                <label>Wifi AP ip address
-                    <input name="APIpAddress" type="text">
-                </label>
-                <label>Wifi AP gateway
-                    <input name="APGateway" type="text">
-                </label>
-                <label>Wifi AP subnet
-                    <input name="APSubnet" type="text">
-                </label>
-                <label>Temperature shift
-                    <input name="TShift" type="text">
-                </label>
-                <label>Wifi connected SSID
-                    <input name="ClientSSID" type="text">
-                </label>
-                <label>Wifi connected password
-                    <input name="ClientPassword" type="text">
-                </label>
-                <button type="submit" class="btn-save" name="btn-modal">save</button>
-                <button class="btn-save" onclick="restart();">Restart ESP</button>
-                <label> <br></label>{# white space #}
+                <div class="input-block">
+                    <p>AP Settings</p>
+                    <label>Wifi AP SSID
+                        <input name="APSSID" type="text">
+                    </label>
+                    <label>Wifi AP password
+                        <input name="APPassword" type="text">
+                    </label>
+                    <label>Wifi AP channel
+                        <input name="APChannel" type="text">
+                    </label>
+                    <label>Wifi AP hidden
+                        <input name="APHidden" type="text">
+                    </label>
+                    <label>Wifi AP max_connection
+                        <input name="APMaxConnection" type="text">
+                    </label>
+                </div>
+                <div class="clear-both"></div>
+                <div class="input-block">
+                    <p>AP Ip Settings</p>
+                    <label>Wifi AP ip address
+                        <input name="APIpAddress" type="text">
+                    </label>
+                    <label>Wifi AP gateway
+                        <input name="APGateway" type="text">
+                    </label>
+                    <label>Wifi AP subnet
+                        <input name="APSubnet" type="text">
+                    </label>
+                </div>
+                <div class="clear-both"></div>
+                <div class="input-block">
+                    <p>Other</p>
+                    <label>Temperature shift
+                        <input name="TShift" type="text">
+                    </label>
+                </div>
+                <div class="clear-both"></div>
+                <div class="input-block">
+                    <p>Wifi Client Settings</p>
+                    <label>Wifi connected SSID
+                        <input name="ClientSSID" type="text">
+                    </label>
+                    <label>Wifi connected password
+                        <input name="ClientPassword" type="text">
+                    </label>
+                </div>
             </form>
+            <div class="modal-footer">
+                <button form="modal-form" type="submit" class="btn-save" name="btn-modal">Save</button>
+                <button class="btn-save" onclick="restart();">Restart ESP</button>
+            </div>
         </div>
     </div>
 </div>
