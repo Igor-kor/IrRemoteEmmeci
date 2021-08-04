@@ -59,6 +59,7 @@ class Settings {
     char* getClientSSID();
     char* getClientPassword();
     char* getTShift();
+    int getIntTShift();
     char* getAPChannel();
     char* getAPHidden();
     char* getAPMaxConnection();

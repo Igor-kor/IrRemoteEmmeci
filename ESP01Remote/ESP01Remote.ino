@@ -1,10 +1,3 @@
-/*
-   todo:
-  -+5 - сделать функцию рестарта
-   8 - сделать накопление данных о влажности чтобы сгладить и усреднить данные
-   10 - сделать подключение как клиента к точке, при этом выключить раздачу(при невозможности подключиться включать точку доступа)
-   11 - указать правильный размер eeprom и переменных
-*/
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 #include <DHT.h>
@@ -93,7 +86,7 @@ void handle_Remote()
 void handle_Temp()
 {
   JSONVar response;
-  response["Temperature"] = dht.readTemperature() + settings.getTShift().toInt();
+  response["Temperature"] = dht.readTemperature() + settings.getIntTShift();
   response["Humidity"]  =  dht.readHumidity();
   server.send(200, "application/json", JSON.stringify(response).c_str());
 }

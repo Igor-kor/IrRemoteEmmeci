@@ -150,6 +150,11 @@ char* Settings::getClientPassword() {
 char* Settings::getTShift() {
   return TShift;
 }
+int Settings::getIntTShift() {
+  String str;
+  str = String(TShift);
+  return str.toInt();
+}
 char* Settings::getAPChannel() {
   return APChannel;
 }
