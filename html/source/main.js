@@ -30,7 +30,7 @@ function restart() {
     requestRemote.send(null)
 }
 
-window.onload = function () {
+document.addEventListener("DOMContentLoaded", function(event) {
     getValues();
     const modal = document.getElementById("myModal");
     const modalForm = document.getElementsByClassName("modal-form")[0];
@@ -49,7 +49,13 @@ window.onload = function () {
             modal.style.display = "none";
         }
     }
-};
+    const inputs = document.querySelectorAll(".trim-change");
+    inputs.forEach((input)=>{
+        input.addEventListener('change',()=>{
+            input.value= input.value.trim();
+        });
+    });
+});
 const requestGetSettings = new XMLHttpRequest();
 const requestSendSettings = new XMLHttpRequest();
 async function sendSetting(event) {
