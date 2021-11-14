@@ -40,7 +40,7 @@ install minifyjs (https://www.npmjs.com/package/gulp-minify)
 npm install --save-dev gulp-minify
 ```
 
-install minifyjs (https://www.npmjs.com/package/gulp-rename)
+install rename (https://www.npmjs.com/package/gulp-rename)
 
 ```
 npm install --save-dev gulp-rename

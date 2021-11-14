@@ -32,6 +32,7 @@ void Settings::SaveSettings() {
   eepromWrite(adrAPChannel, EEPROM_SIZE_VALUE, APChannel);
   eepromWrite(adrAPHidden, EEPROM_SIZE_VALUE, APHidden);
   eepromWrite(adrAPMaxConnection, EEPROM_SIZE_VALUE, APMaxConnection);
+  EEPROM.commit();
 }
 
 void Settings::ReadSettings() {
@@ -80,7 +81,6 @@ void Settings::eepromWrite(int addr, IPAddress value)
     EEPROM.write(addr, ipBuffer[i]);
     addr += 1;
   }
-  EEPROM.commit();
 }
 
 void Settings::eepromWrite(int addr, int size, char* value)
@@ -91,7 +91,6 @@ void Settings::eepromWrite(int addr, int size, char* value)
     if (value[i] == '\0')break;
     addr += 1;
   }
-  EEPROM.commit();
 }
 
 void Settings::eepromRead(int addr, int size, char* value)
