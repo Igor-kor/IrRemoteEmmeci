@@ -4,7 +4,7 @@ const htmlmin = require('gulp-htmlmin');
 const cleanCSS = require('gulp-clean-css');
 const twig = require('gulp-twig');
 const minify = require('gulp-minify');
-
+const rename = require('gulp-rename');
 // Task to minify HTML
 gulp.task('minify-html', function() {
     return gulp.src('build/*.html')
@@ -34,6 +34,16 @@ gulp.task('compile', function () {
         .pipe(gulp.dest('build/'));
 });
 
+gulp.task('compile_index_h', function () {
+    return gulp.src('source/index_html.twig')
+        .pipe(twig({
+            data: { }
+        }))
+        .pipe(rename({ extname: '.h' }))
+        .pipe(gulp.dest('../ESP01Remote/')
+        );
+});
+
 gulp.task('compress',async function() {
     gulp.src('source/*.js')
         .pipe(minify())
@@ -45,4 +55,4 @@ gulp.task('watch', function (){
 // other tasks
 });
 
-gulp.task('default',gulp.series('compress','minify-css','compile','minify-html'));
+gulp.task('default',gulp.series('compress','minify-css','compile','minify-html','compile_index_h'));

@@ -40,6 +40,12 @@ install minifyjs (https://www.npmjs.com/package/gulp-minify)
 npm install --save-dev gulp-minify
 ```
 
+install rename (https://www.npmjs.com/package/gulp-rename)
+
+```
+npm install --save-dev gulp-rename
+```
+
 for run 
 
 ```
@@ -51,11 +57,7 @@ watcher
 ```
 gulp watch
 ```
-Затем необходимо из html/public/emmeci.html
-скопировать в 
-```cpp
-const char index_html[] PROGMEM = R"rawliteral( ... )rawliteral";
-```
+
 # В процессе разработки:
 - сделать функцию рестарта
 - сделать накопление данных о влажности чтобы сгладить и усреднить данные

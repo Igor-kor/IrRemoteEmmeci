@@ -5,6 +5,7 @@
   "main": "gulpfile.js",
   "dependencies": {
     "gulp-htmlmin": "^5.0.1",
+    "gulp-rename": "^2.0.0",
     "gulp-twig": "^1.2.0"
   },
   "devDependencies": {
